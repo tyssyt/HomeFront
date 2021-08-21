@@ -1,0 +1,5 @@
+set -e | exit
+
+ssh tys@pihole.home 'rm -rf /var/www/html/HomeFront/*'
+scp -r dist/HomeFront/* tys@pihole.home:/var/www/html/HomeFront
+echo 'Successfully shipped Homefront to tys@pihole.home:/var/www/html/HomeFront'
