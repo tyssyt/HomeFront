@@ -1,35 +1,19 @@
-<div class="topthing">
-  <mat-form-field appearance="standard">
-    <input #box matInput placeholder="Twitch Username" value="{{ userName }}" (keyup.enter)="updateUsername(box.value)">
-    <mat-icon matSuffix inline (click)="updateUsername(box.value)">search</mat-icon>
-  </mat-form-field>
+<button class="showPlaying" mat-raised-button color="primary" disableRipple="true" *ngIf="piPlayer.isPlaying()">
+  <mat-icon>play_circle_outline</mat-icon>
+  <b>{{ piPlayer.getPlaying() }}</b>
 
-  <button mat-raised-button color="primary" *ngIf="piPlayer.isPlaying()">
-    <b>{{ piPlayer.getPlaying() }}</b>
-    <button mat-icon-button color="warn" (click)="piPlayer.stop()">
-      <mat-icon>cancel</mat-icon>
-    </button>
-  </button >
-</div>
+  <mat-slide-toggle [checked]="piPlayer.hasChat()" (change)="onChatToggle($event)" *ngIf="showChatToggle()"></mat-slide-toggle>
+  <mat-icon *ngIf="showChatToggle()">chat</mat-icon>
 
-<div class="spinner" *ngIf="twitchStreams.length == 0 && refresher != undefined ">
-  <mat-spinner ></mat-spinner>
-</div>
+  <button mat-icon-button color="warn" (click)="piPlayer.stop()">
+    <mat-icon>cancel</mat-icon>
+  </button>
+</button>
 
-<div class="grid">
-  <mat-card *ngFor="let stream of twitchStreams">
-    <img mat-card-image [src]="getThumbUrl(stream)" alt="Stream Preview" style="background-color:grey;">
-    <mat-card-title>{{ stream.user_name }}</mat-card-title>
-    <mat-card-content>{{ stream.title }}</mat-card-content>
-    <div class="spacer"></div>
-    <mat-card-subtitle>
-      <span><mat-icon inline>sports_esports</mat-icon>&nbsp;{{ stream.game_name }}</span>
-      <span class="leftpad"><mat-icon inline>visibility</mat-icon>&nbsp;{{ stream.viewer_count}}</span>
-      <span class="leftpad"><mat-icon inline>schedule</mat-icon>&nbsp;{{ getUptime(stream) }}</span>
-    </mat-card-subtitle>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="startStream(stream)">Open on Pi</button>
-      <a mat-raised-button color="primary" href="https://www.twitch.tv/{{ stream.user_login }}" target="_blank">Open in Browser <mat-icon inline>open_in_new</mat-icon></a>
-    </mat-card-actions>
-  </mat-card>
-</div>
+
+<nav mat-tab-nav-bar>
+  <a mat-tab-link routerLink="tv" [active]="route == 'tv'">TV</a>
+  <a mat-tab-link routerLink="twitch" [active]="route == 'twitch'">Twitch</a>
+  <a mat-tab-link disabled>Youtube</a>
+</nav>
+<router-outlet></router-outlet>

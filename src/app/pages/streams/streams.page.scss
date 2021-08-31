@@ -1,13 +1,5 @@
-.topthing .mat-form-field {
-  margin-left: 10px;
-  margin-right: 10px;
-  display: inline-block;
-}
-.mat-form-field .mat-icon {
-  cursor: pointer;
-}
-
-.topthing .mat-raised-button {
+.showPlaying {
+  margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
   padding-right: 5px;
@@ -15,43 +7,14 @@
   pointer-events: none;
   cursor: default;
 }
-.topthing .mat-raised-button .mat-icon-button {
+.showPlaying .mat-icon-button {
   pointer-events: auto
 }
-
-
-.spinner {
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.showPlaying .mat-slide-toggle {
+  margin-left: 15px;
+  pointer-events: auto
 }
-
-.grid {
-  margin-top: 10px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 10px;
-}
-
-.grid .mat-card {
-  display:flex;
-  flex-direction: column;
-}
-
-.grid .mat-card-subtitle {
-  margin-bottom: 0px;
-}
-
-.spacer {
-  flex: 1 1 auto;
-}
-
-.leftpad {
-  padding-left: 1rem;
-}
-
-::ng-deep .snack-style {
-  background-color: grey;
-  color:white;
+.showPlaying .mat-icon {
+  margin-right: 10px;
+  pointer-events: auto
 }

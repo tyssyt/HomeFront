@@ -30,4 +30,16 @@ export class BackendService {
   stopStream(): Observable<Object>  {
     return this.client.delete('http://back.home/stream');
   }
+
+  getChat(): Observable<string> {
+    return this.client.get('http://back.home/chat') as Observable<string>;
+  }
+
+  openChat(stream: string): Observable<string>  {
+    return this.client.put('http://back.home/chat', stream, httpOptions) as Observable<string>;
+  }
+
+  closeChat(): Observable<Object>  {
+    return this.client.delete('http://back.home/chat');
+  }
 }

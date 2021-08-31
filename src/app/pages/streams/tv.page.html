@@ -1,0 +1,23 @@
+<div class="grid">
+  <mat-card>
+    <img mat-card-image src="https://upload.wikimedia.org/wikipedia/commons/5/53/Das_Erste-Logo.svg" alt="Das Erste" style="background-color:grey;">
+    <mat-card-title>Das Erste</mat-card-title>
+    <mat-card-content>No stream Information available</mat-card-content>
+    <div class="spacer"></div>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="startStream('daserste.de/live')">Open on Pi</button>
+      <a mat-raised-button color="primary" href="https://www.daserste.de/live" target="_blank">Open in Browser <mat-icon inline>open_in_new</mat-icon></a>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card>
+    <img mat-card-image src="https://upload.wikimedia.org/wikipedia/commons/c/c1/ZDF_logo.svg" alt="Das Erste" style="background-color:grey;">
+    <mat-card-title>ZDF</mat-card-title>
+    <mat-card-content>No stream Information available</mat-card-content>
+    <div class="spacer"></div>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="startStream('zdf.de/live-tv')">Open on Pi</button>
+      <a mat-raised-button color="primary" href="https://www.zdf.de/live-tv" target="_blank">Open in Browser <mat-icon inline>open_in_new</mat-icon></a>
+    </mat-card-actions>
+  </mat-card>
+</div>

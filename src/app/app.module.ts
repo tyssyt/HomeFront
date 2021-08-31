@@ -9,7 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule} from '@angular/material/button';
+import { MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -20,14 +22,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 import { HeaderComponent } from './components/header/header.component';
 import { StreamsPage } from './pages/streams/streams.page';
+import { TwitchPage } from './pages/streams/twitch.page';
+import { TvPage } from './pages/streams/tv.page';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    StreamsPage
+    StreamsPage,
+    TwitchPage,
+    TvPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +45,9 @@ import { StreamsPage } from './pages/streams/streams.page';
     ReactiveFormsModule,
     CookieModule.forRoot(),
     MatButtonModule,
+    MatButtonToggleModule,
     MatSliderModule,
+    MatSlideToggleModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
@@ -48,7 +57,8 @@ import { StreamsPage } from './pages/streams/streams.page';
     MatFormFieldModule,
     MatInputModule,
     MatChipsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
