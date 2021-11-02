@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DownloadsPage } from './pages/downloads/downloads.page';
 import { StreamsPage } from './pages/streams/streams.page';
 import { TvPage } from './pages/streams/tv.page';
 import { TwitchPage } from './pages/streams/twitch.page';
+import { WeatherPage } from './pages/weather/weather.page';
 
 const routes: Routes = [
   {
@@ -22,7 +24,15 @@ const routes: Routes = [
         redirectTo: '/streams/tv'
       }
     ]
-  }
+  },
+  {
+    path: 'downloads',
+    component: DownloadsPage,
+  },
+  {
+    path: 'weather',
+    component: WeatherPage,
+  },
 ];
 
 @NgModule({

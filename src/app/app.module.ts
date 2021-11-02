@@ -23,18 +23,24 @@ import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
+import {MatProgressBar, MatProgressBarModule} from '@angular/material/progress-bar';
 import { HeaderComponent } from './components/header/header.component';
 import { StreamsPage } from './pages/streams/streams.page';
 import { TwitchPage } from './pages/streams/twitch.page';
 import { TvPage } from './pages/streams/tv.page';
+import { DownloadsPage } from './pages/downloads/downloads.page';
+import { WeatherPage } from './pages/weather/weather.page';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     StreamsPage,
+    DownloadsPage,
     TwitchPage,
-    TvPage
+    TvPage,
+    WeatherPage,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +64,9 @@ import { TvPage } from './pages/streams/tv.page';
     MatInputModule,
     MatChipsModule,
     MatSnackBarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatExpansionModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,16 @@
+ .split {
+  height: 100%;
+  width: 48%;
+  position: fixed;
+  z-index: 1;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}

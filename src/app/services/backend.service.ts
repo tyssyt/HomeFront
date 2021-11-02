@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TwitchStream } from 'src/app/model/twitchStream';
+import { Download } from '../model/download';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -42,4 +43,35 @@ export class BackendService {
   closeChat(): Observable<Object>  {
     return this.client.delete('http://back.home/chat');
   }
+
+  getAllScannables(): Observable<string[]> {
+    return this.client.get('http://back.home/download/scan') as Observable<string[]>;
+  }
+
+  getScannable(scannable: string): Observable<string[]> {
+    return this.client.get('http://back.home/download/scan/' + scannable) as Observable<string[]>;
+  }
+
+  deleteScannable(scannable: string): Observable<Object> {
+    return this.client.delete('http://back.home/download/scan/' + scannable);
+  }
+
+  getAllDownloads(): Observable<Download[]> {
+    return this.client.get('http://back.home/download') as Observable<Download[]>;
+  }
+
+  startDownload(url: string, path: string, query?: string): Observable<Download> {
+    var body;
+    if (query) {
+      body = {"url": url, "path": path, "query": query}
+    } else {
+      body = {"url": url, "path": path}
+    }
+    return this.client.post('http://back.home/download', body) as Observable<Download>;
+  }
+
+  deleteDownload(uuid: string): Observable<Object> {
+    return this.client.delete('http://back.home/download/' + uuid);
+  }
+
 }

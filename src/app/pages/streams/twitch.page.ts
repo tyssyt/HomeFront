@@ -31,8 +31,10 @@ export class TwitchPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.refresher != undefined)
+    if (this.refresher != undefined) {
       this.refresher.unsubscribe();
+      this.refresher = undefined;
+    }
   }
 
   updateUsername(newName: string) {
