@@ -67,11 +67,6 @@ export class DownloadsPage implements OnInit, OnDestroy {
     scannable.loadUrls(this.backend);
   }
 
-  deleteScannable(scannable: Scannable) {
-    this.backend.deleteScannable(scannable.name).subscribe();
-    this.scannables = this.scannables?.filter(s => s !== scannable);
-  }
-
   startAllDownloads(urls: Downloadable[], source: Scannable) {
     for (const url of urls)
       this.startDownload(url, source);
@@ -81,11 +76,6 @@ export class DownloadsPage implements OnInit, OnDestroy {
     let folder = source.name.substring(0, source.name.indexOf('.'));
     this.backend.startDownload(url.url, folder + "/" + url.name, "jtoken=d14a57a72d").subscribe(download => this.downloads?.push(download));
     this.setFastRefresher();
-  }
-
-  deleteDownload(download: Download) {
-    this.backend.deleteDownload(download.uuid).subscribe();
-    this.downloads = this.downloads?.filter(d => d !== download);
   }
 
 

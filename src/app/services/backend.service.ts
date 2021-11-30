@@ -52,10 +52,6 @@ export class BackendService {
     return this.client.get('http://back.home/download/scan/' + scannable) as Observable<string[]>;
   }
 
-  deleteScannable(scannable: string): Observable<Object> {
-    return this.client.delete('http://back.home/download/scan/' + scannable);
-  }
-
   getAllDownloads(): Observable<Download[]> {
     return this.client.get('http://back.home/download') as Observable<Download[]>;
   }
@@ -68,10 +64,6 @@ export class BackendService {
       body = {"url": url, "path": path}
     }
     return this.client.post('http://back.home/download', body) as Observable<Download>;
-  }
-
-  deleteDownload(uuid: string): Observable<Object> {
-    return this.client.delete('http://back.home/download/' + uuid);
   }
 
 }

@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { PiPlayer } from 'src/app/services/piPlayer';
 
 @Component({
-  selector: 'app-tv.page',
+  selector: 'page-tv',
   templateUrl: './tv.page.html',
   styleUrls: ['./tv.page.scss']
 })

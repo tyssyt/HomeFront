@@ -16,10 +16,6 @@ export class Scannable {
     }
   }
 
-  public delete(backend: BackendService) {
-    backend.deleteScannable(this.name).subscribe();
-  }
-
 }
 
 export class Downloadable {
@@ -29,9 +25,11 @@ export class Downloadable {
   constructor(
     public url: string
   ) {
-    let decoded   = decodeURIComponent(url.substring(38));
+    let decoded   = decodeURIComponent(url.substring(29));
+    decoded       = decoded.substring(decoded.indexOf('/') +1);
     this.category = decoded.substring(0, decoded.indexOf('/'));
     this.name     = decoded.substring(decoded.lastIndexOf('/') +1);
+    console.log("url: " + url + ", decoded: " + decoded);
     if (this.category == "Shows") {
       let qualEndIdx = this.name.indexOf('p)');
       if (qualEndIdx > 0) {
@@ -39,8 +37,9 @@ export class Downloadable {
         this.category = this.category + " - " + this.name.substring(qualStartIdx +1, qualEndIdx +1);
       }
     }
+    let fileEnding = this.name.substring(this.name.lastIndexOf('.'));
+    this.category = this.category + ' (' + fileEnding + ')';
   }
-
 }
 
 //TODO put somewhere more generic util

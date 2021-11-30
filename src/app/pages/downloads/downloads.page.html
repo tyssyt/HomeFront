@@ -1,6 +1,6 @@
 <div class="split left">
   <div *ngIf="scannables == undefined">
-    <mat-spinner ></mat-spinner>
+    <mat-spinner></mat-spinner>
   </div>
 
   <mat-accordion *ngIf="scannables != undefined">
@@ -34,29 +34,24 @@
         </ng-container>
 
       </mat-list>
-      <mat-action-row>
-        <button mat-icon-button color="warn" (click)="deleteScannable(scannable)">
-          <mat-icon>delete_forever</mat-icon>
-        </button>
-      </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
 
 <div class="split right">
   <div *ngIf="downloads == undefined">
-    <mat-spinner ></mat-spinner>
+    <mat-spinner></mat-spinner>
   </div>
 
   <mat-list *ngIf="downloads != undefined">
     <div mat-subheader>Downloads</div>
     <mat-divider></mat-divider>
-    <mat-list-item *ngFor="let download of downloads" title="test">
+    <mat-list-item *ngFor="let download of downloads" [title]="download.path" >
       <mat-icon mat-list-icon [color]="getIconColor(download)">{{ getIcon(download) }}</mat-icon>
       <div mat-line>{{ download.path }}</div>
       <div mat-line> <mat-progress-bar [color]="getProgressBarColor(download)" [mode]="getProgressBarMode(download)" [value]="100 * download.current_size / download.size"></mat-progress-bar></div>
       <div mat-line>{{ readableByteCount(download.current_size) }} / {{ readableByteCount(download.size) }}</div>
-      <button mat-icon-button color="warn" (click)="deleteDownload(download)">
+      <button mat-icon-button color="warn"> <!-- TODO give the button cancel symbol & cancel download in backend-->
         <mat-icon>delete_forever</mat-icon>
       </button>
     </mat-list-item>
