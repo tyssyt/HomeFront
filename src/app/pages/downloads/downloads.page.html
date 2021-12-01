@@ -46,7 +46,7 @@
   <mat-list *ngIf="downloads != undefined">
     <div mat-subheader>Downloads</div>
     <mat-divider></mat-divider>
-    <mat-list-item *ngFor="let download of downloads" [title]="download.path" >
+    <mat-list-item *ngFor="let download of downloads; trackBy: trackById" [title]="download.path" >
       <mat-icon mat-list-icon [color]="getIconColor(download)">{{ getIcon(download) }}</mat-icon>
       <div mat-line>{{ download.path }}</div>
       <div mat-line> <mat-progress-bar [color]="getProgressBarColor(download)" [mode]="getProgressBarMode(download)" [value]="100 * download.current_size / download.size"></mat-progress-bar></div>

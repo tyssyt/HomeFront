@@ -8,7 +8,7 @@
 </div>
 
 <div class="grid">
-  <mat-card *ngFor="let stream of twitchStreams">
+  <mat-card *ngFor="let stream of twitchStreams; trackBy: trackById">
     <img mat-card-image [src]="getThumbUrl(stream)" alt="Stream Preview" style="background-color:grey;">
     <mat-card-title>{{ stream.user_name }}</mat-card-title>
     <mat-card-content>{{ stream.title }}</mat-card-content>
@@ -19,7 +19,7 @@
       <span class="leftpad"><mat-icon inline>schedule</mat-icon>&nbsp;{{ getUptime(stream) }}</span>
     </mat-card-subtitle>
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="startStream(stream)">Open on Pi</button>
+      <button mat-raised-button color="primary" [disabled]="stream.viewer_count == 0 && getUptimeMin(stream) > 1" (click)="startStream(stream)">Open on Pi</button>
       <a mat-raised-button color="primary" href="https://www.twitch.tv/{{ stream.user_login }}" target="_blank">Open in Browser <mat-icon inline>open_in_new</mat-icon></a>
     </mat-card-actions>
   </mat-card>

@@ -123,4 +123,8 @@ export class DownloadsPage implements OnInit, OnDestroy {
       return mb.toLocaleString("en-US", {minimumFractionDigits: 1, maximumFractionDigits: 1}) + " MB"
   }
 
+  trackById(i: number, dl: Download): string {
+    return dl.uuid;
+  }
+
 }
