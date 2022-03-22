@@ -1,8 +1,15 @@
+.header {
+  height: 50px;
+  position: fixed;
+  top: 0;
+  z-index: 69;
+}
+
+.header-placeholder {
+  height: 50px;
+}
+
 span.scrollmenu {
   overflow: auto;
   white-space: nowrap;
-}
-
-.spacer {
-  flex: 1 1 auto;
 }

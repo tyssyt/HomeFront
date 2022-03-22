@@ -1,7 +1,5 @@
 <div class="split left">
-  <div *ngIf="scannables == undefined">
-    <mat-spinner></mat-spinner>
-  </div>
+  <mat-spinner *ngIf="scannables == undefined"></mat-spinner>
 
   <mat-accordion *ngIf="scannables != undefined">
     <mat-expansion-panel *ngFor="let scannable of scannables" (opened)="openScannable(scannable)">
@@ -11,9 +9,7 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
-      <div *ngIf="scannable.urls == undefined ">
-        <mat-spinner ></mat-spinner>
-      </div>
+      <mat-spinner *ngIf="scannable.urls == undefined" ></mat-spinner>
 
       <mat-list dense *ngIf="scannable.urls != undefined">
         <ng-container *ngFor="let group of scannable.urls | keyvalue">
@@ -39,9 +35,7 @@
 </div>
 
 <div class="split right">
-  <div *ngIf="downloads == undefined">
-    <mat-spinner></mat-spinner>
-  </div>
+  <mat-spinner *ngIf="downloads == undefined"></mat-spinner>
 
   <mat-list *ngIf="downloads != undefined">
     <div mat-subheader>Downloads</div>

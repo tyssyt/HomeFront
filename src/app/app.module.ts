@@ -24,7 +24,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
-import {MatProgressBar, MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatMenuModule } from '@angular/material/menu';
 import { HeaderComponent } from './components/header/header.component';
 import { StreamsPage } from './pages/streams/streams.page';
 import { TwitchPage } from './pages/streams/twitch.page';
@@ -67,6 +68,7 @@ import { WeatherPage } from './pages/weather/weather.page';
     MatTabsModule,
     MatExpansionModule,
     MatProgressBarModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

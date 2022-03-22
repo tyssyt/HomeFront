@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TwitchStream } from 'src/app/model/twitchStream';
 import { Download } from '../model/download';
+import { ChannelPreview } from '../model/channelPreview';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -64,6 +65,14 @@ export class BackendService {
       body = {"url": url, "path": path}
     }
     return this.client.post('http://back.home/download', body) as Observable<Download>;
+  }
+
+  getTvChannels(): Observable<string[]> {
+    return this.client.get('http://back.home/dvbc/tv') as Observable<string[]>;
+  }
+
+  getChannelPreviews(channels: string[]): Observable<ChannelPreview[]> {
+    return this.client.post('http://back.home/dvbc/tv/previews', channels) as Observable<ChannelPreview[]>;
   }
 
 }

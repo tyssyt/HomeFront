@@ -1,21 +1,23 @@
 .grid {
   margin-top: 10px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
   gap: 10px;
 }
 
 .grid .mat-card {
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
 
-.grid .mat-card-subtitle {
-  margin-bottom: 0px;
+.spacer {
+  flex-grow: 1;
 }
 
-.spacer {
-  flex: 1 1 auto;
+.card-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 0;
 }
 
 ::ng-deep .snack-style {

@@ -3,9 +3,7 @@
   <mat-icon matSuffix inline (click)="updateUsername(box.value)">search</mat-icon>
 </mat-form-field>
 
-<div class="spinner" *ngIf="twitchStreams.length == 0 && refresher != undefined">
-  <mat-spinner></mat-spinner>
-</div>
+<mat-spinner *ngIf="twitchStreams.length == 0 && refresher != undefined" style="margin: auto;"></mat-spinner>
 
 <div class="grid">
   <mat-card *ngFor="let stream of twitchStreams; trackBy: trackById">
@@ -14,9 +12,11 @@
     <mat-card-content>{{ stream.title }}</mat-card-content>
     <div class="spacer"></div>
     <mat-card-subtitle>
-      <span><mat-icon inline>sports_esports</mat-icon>&nbsp;{{ stream.game_name }}</span>
-      <span class="leftpad"><mat-icon inline>visibility</mat-icon>&nbsp;{{ stream.viewer_count}}</span>
-      <span class="leftpad"><mat-icon inline>schedule</mat-icon>&nbsp;{{ getUptime(stream) }}</span>
+      <ul class="stream-properties">
+        <li><mat-icon inline>sports_esports</mat-icon>&nbsp;{{ stream.game_name }}</li>
+        <li><mat-icon inline>visibility</mat-icon>&nbsp;{{ stream.viewer_count}}</li>
+        <li><mat-icon inline>schedule</mat-icon>&nbsp;{{ getUptime(stream) }}</li>
+      </ul>
     </mat-card-subtitle>
     <mat-card-actions>
       <button mat-raised-button color="primary" [disabled]="stream.viewer_count == 0 && getUptimeMin(stream) > 1" (click)="startStream(stream)">Open on Pi</button>

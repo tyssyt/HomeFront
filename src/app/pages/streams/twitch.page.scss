@@ -7,13 +7,6 @@
   cursor: pointer;
 }
 
-.spinner {
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .grid {
   margin-top: 10px;
   display: grid;
@@ -22,7 +15,7 @@
 }
 
 .grid .mat-card {
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
 
@@ -31,11 +24,22 @@
 }
 
 .spacer {
-  flex: 1 1 auto;
+  flex-grow: 1;
 }
 
-.leftpad {
-  padding-left: 1rem;
+.stream-properties {
+  padding: 0;
+  margin: 0;
+}
+
+.stream-properties li {
+  padding-right: 1rem;
+  display: inline-block;
+  list-style: none;
+}
+
+.stream-properties li:last-child {
+  padding-right: 0;
 }
 
 ::ng-deep .snack-style {
