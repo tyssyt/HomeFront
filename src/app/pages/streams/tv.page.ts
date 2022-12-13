@@ -75,7 +75,9 @@ export class TvPage implements OnInit {
   }
 
   openChannel(channel: string) {
-    this.piPlayer.start(channel);
+    //this.piPlayer.start(channel);
+    console.log("opening " + channel);
+    this.backend.startVideo( { 'type': 'DvbC', "uri": channel } ).subscribe();
     this.snackBar.open("Stream is starting, please wait" , "Ok", {duration: 2500, panelClass: ['snack-style']});
   }
 

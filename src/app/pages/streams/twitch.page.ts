@@ -105,7 +105,7 @@ export class TwitchPage implements OnInit, OnDestroy {
   }
 
   startStream(stream: TwitchStream) {
-    this.piPlayer.start('twitch.tv/' + stream.user_login);
+    this.piPlayer.start( { 'type': 'Twitch', 'uri': 'twitch.tv/' + stream.user_login });
     this.snackBar.open('Stream is starting, please wait (pre-roll Ads may be running)' , 'Ok', {duration: 2500, panelClass: ['snack-style']});
   }
 

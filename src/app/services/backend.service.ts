@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { TwitchStream } from 'src/app/model/twitchStream';
 import { Download } from '../model/download';
 import { ChannelPreview } from '../model/channelPreview';
+import { Video } from '../model/video';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,16 +22,16 @@ export class BackendService {
     return this.client.get('http://back.home/twitch/live/' + channel.toLowerCase()) as Observable<TwitchStream[]>;
   }
 
-  getStream(): Observable<string> {
-    return this.client.get('http://back.home/stream') as Observable<string>;
+  getVideo(): Observable<Video> {
+    return this.client.get('http://back.home/videoplayer') as Observable<Video>;
   }
 
-  startStream(stream: string): Observable<string>  {
-    return this.client.put('http://back.home/stream', stream, httpOptions) as Observable<string>;
+  startVideo(video: Video): Observable<Video>  {
+    return this.client.put('http://back.home/videoplayer', video, httpOptions) as Observable<Video>;
   }
 
   stopStream(): Observable<Object>  {
-    return this.client.delete('http://back.home/stream');
+    return this.client.delete('http://back.home/videoplayer');
   }
 
   getChat(): Observable<string> {

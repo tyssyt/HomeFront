@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { interval, Observable, Subscription } from 'rxjs';
+import { Video } from '../model/video';
 import { BackendService } from './backend.service';
 
 
@@ -8,7 +9,7 @@ import { BackendService } from './backend.service';
 })
 export class PiPlayer {
   refresher!: Subscription;
-  nowPlaying: string | undefined;
+  nowPlaying: Video | undefined;
   chat: string | undefined;
 
   constructor(
@@ -19,7 +20,7 @@ export class PiPlayer {
   }
 
   updateStatus() {
-    this.backendService.getStream().subscribe( stream => this.nowPlaying = stream);
+    this.backendService.getVideo().subscribe( stream => this.nowPlaying = stream);
     this.backendService.getChat().subscribe( chat => this.chat = chat);
   }
 
@@ -27,12 +28,12 @@ export class PiPlayer {
     return this.nowPlaying != undefined;
   }
 
-  public getPlaying(): string | undefined {
+  public getPlaying(): Video | undefined {
     return this.nowPlaying;
   }
 
-  public start(stream: string) {
-    this.backendService.startStream('"' + stream + '"').subscribe();
+  public start(video: Video) {
+    this.backendService.startVideo(video).subscribe();
   }
 
   public stop() {

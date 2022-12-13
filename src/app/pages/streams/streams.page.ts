@@ -29,14 +29,14 @@ export class StreamsPage implements OnInit {
 
   showChatToggle(): boolean {
     let playing = this.piPlayer.getPlaying();
-    return playing != undefined && playing.startsWith("twitch.tv/");
+    return playing != undefined && playing.type == "Twitch";
   }
 
   onChatToggle(event: MatSlideToggleChange) {
     if (event.checked) {
       let playing = this.piPlayer.getPlaying();
       if (playing != undefined) {
-        this.piPlayer.openChat(playing.substr(10));
+        this.piPlayer.openChat(playing.uri.substring(10));
       }
     } else {
       this.piPlayer.closeChat();

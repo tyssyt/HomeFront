@@ -1,6 +1,6 @@
 <button class="showPlaying" mat-raised-button color="primary" disableRipple="true" *ngIf="piPlayer.isPlaying()">
   <mat-icon>play_circle_outline</mat-icon>
-  <b>{{ piPlayer.getPlaying() }}</b>
+  <b>{{ piPlayer.getPlaying()?.uri }}</b>
 
   <mat-slide-toggle [checked]="piPlayer.hasChat()" (change)="onChatToggle($event)" *ngIf="showChatToggle()"></mat-slide-toggle>
   <mat-icon *ngIf="showChatToggle()">chat</mat-icon>
