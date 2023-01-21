@@ -88,6 +88,9 @@ export class TwitchPage implements OnInit, OnDestroy {
   }
 
   getThumbUrl(stream: TwitchStream): string {
+    if (stream.viewer_count == 0) {
+      return stream.offline_image_url;
+    }
     return stream.thumbnail_url.replace("{width}", "480").replace("{height}", "270") + '?' + this.getUptimeMin(stream); //reload every minute
   }
 

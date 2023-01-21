@@ -8,5 +8,7 @@ export interface TwitchStream {
   title: string,
   viewer_count: number,
   started_at: string,
-  thumbnail_url: string
+  thumbnail_url: string,
+  profile_image_url: string,
+  offline_image_url: string, 
 }

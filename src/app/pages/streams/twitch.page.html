@@ -8,7 +8,10 @@
 <div class="grid">
   <mat-card *ngFor="let stream of twitchStreams; trackBy: trackById">
     <img mat-card-image [src]="getThumbUrl(stream)" alt="Stream Preview" style="background-color:grey;">
-    <mat-card-title>{{ stream.user_name }}</mat-card-title>
+    <mat-card-header>
+      <img mat-card-avatar [src]="stream.profile_image_url">
+      <mat-card-title>{{ stream.user_name }}</mat-card-title>
+    </mat-card-header>
     <mat-card-content>{{ stream.title }}</mat-card-content>
     <div class="spacer"></div>
     <mat-card-subtitle>
