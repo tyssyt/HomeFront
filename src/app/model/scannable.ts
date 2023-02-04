@@ -29,7 +29,6 @@ export class Downloadable {
     decoded       = decoded.substring(decoded.indexOf('/') +1);
     this.category = decoded.substring(0, decoded.indexOf('/'));
     this.name     = decoded.substring(decoded.lastIndexOf('/') +1);
-    console.log("url: " + url + ", decoded: " + decoded);
     if (this.category == "Shows") {
       let qualEndIdx = this.name.indexOf('p)');
       if (qualEndIdx > 0) {

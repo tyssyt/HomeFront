@@ -39,9 +39,9 @@ export class DownloadsPage implements OnInit, OnDestroy {
 
   loadDownloads() {
     this.backend.getAllDownloads().subscribe(downloads => {
-      this.downloads = downloads;
+      this.downloads = downloads.active_downloads.concat(downloads.queue);
 
-      if (downloads.length == 0)
+      if (downloads.active_downloads.length == 0)
         this.setSlowRefresher();
       else
         this.setFastRefresher()
@@ -51,7 +51,7 @@ export class DownloadsPage implements OnInit, OnDestroy {
   setFastRefresher() {
     if (this.hasActiveDownload !== true) {
       this.refresher?.unsubscribe();
-      this.refresher = interval(1000).subscribe(() => this.loadDownloads());
+      this.refresher = interval(100).subscribe(() => this.loadDownloads());
       this.hasActiveDownload = true;
     }
   }
@@ -78,6 +78,9 @@ export class DownloadsPage implements OnInit, OnDestroy {
     this.setFastRefresher();
   }
 
+  cancelDownload(download: Download) {
+    this.backend.cancelDownload(download.uuid).subscribe();
+  }
 
 
 
@@ -85,7 +88,7 @@ export class DownloadsPage implements OnInit, OnDestroy {
     switch (download.status) {
       case "Created":  return "pending"
       case "Running":  return "downloading"
-      case "Finished": return "check_circle_outline"
+      case "Cancelled": return "block"
       case "Error":    return "error"
     }
   }
@@ -93,7 +96,7 @@ export class DownloadsPage implements OnInit, OnDestroy {
     switch (download.status) {
       case "Created":  return ""
       case "Running":  return "accent"
-      case "Finished": return "primary"
+      case "Cancelled": return "warn"
       case "Error":    return "warn"
     }
   }
@@ -108,7 +111,7 @@ export class DownloadsPage implements OnInit, OnDestroy {
     switch (download.status) {
       case "Created":  return "accent"
       case "Running":  return "accent"
-      case "Finished": return "primary"
+      case "Cancelled": return "warn"
       case "Error":    return "warn"
     }
   }

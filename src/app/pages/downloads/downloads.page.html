@@ -45,8 +45,8 @@
       <div mat-line>{{ download.path }}</div>
       <div mat-line> <mat-progress-bar [color]="getProgressBarColor(download)" [mode]="getProgressBarMode(download)" [value]="100 * download.current_size / download.size"></mat-progress-bar></div>
       <div mat-line>{{ readableByteCount(download.current_size) }} / {{ readableByteCount(download.size) }}</div>
-      <button mat-icon-button color="warn"> <!-- TODO give the button cancel symbol & cancel download in backend-->
-        <mat-icon>delete_forever</mat-icon>
+      <button mat-icon-button color="warn" (click)="cancelDownload(download)">
+        <mat-icon>cancel</mat-icon>
       </button>
     </mat-list-item>
   </mat-list>

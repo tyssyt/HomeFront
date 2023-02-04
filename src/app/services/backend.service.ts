@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TwitchStream } from 'src/app/model/twitchStream';
-import { Download } from '../model/download';
+import { Download, Downloads } from '../model/download';
 import { ChannelPreview } from '../model/channelPreview';
 import { Video } from '../model/video';
 
@@ -54,8 +54,8 @@ export class BackendService {
     return this.client.get('http://back.home/download/scan/' + scannable) as Observable<string[]>;
   }
 
-  getAllDownloads(): Observable<Download[]> {
-    return this.client.get('http://back.home/download') as Observable<Download[]>;
+  getAllDownloads(): Observable<Downloads> {
+    return this.client.get('http://back.home/download') as Observable<Downloads>;
   }
 
   startDownload(url: string, path: string, query?: string): Observable<Download> {
@@ -66,6 +66,10 @@ export class BackendService {
       body = {"url": url, "path": path}
     }
     return this.client.post('http://back.home/download', body) as Observable<Download>;
+  }
+
+  cancelDownload(uuid: string): Observable<Object> {
+    return this.client.delete('http://back.home/download/' + uuid);
   }
 
   getTvChannels(): Observable<string[]> {
