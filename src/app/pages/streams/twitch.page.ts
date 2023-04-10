@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
 import { interval, Subscription } from 'rxjs';
 import { TwitchStream } from 'src/app/model/twitchStream';

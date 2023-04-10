@@ -32,6 +32,7 @@ import { TwitchPage } from './pages/streams/twitch.page';
 import { TvPage } from './pages/streams/tv.page';
 import { DownloadsPage } from './pages/downloads/downloads.page';
 import { WeatherPage } from './pages/weather/weather.page';
+import { ClipboardPage } from './pages/clipboard/clipboard.page';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { WeatherPage } from './pages/weather/weather.page';
     TwitchPage,
     TvPage,
     WeatherPage,
+    ClipboardPage
   ],
   imports: [
     BrowserModule,

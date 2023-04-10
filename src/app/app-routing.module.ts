@@ -5,6 +5,7 @@ import { StreamsPage } from './pages/streams/streams.page';
 import { TvPage } from './pages/streams/tv.page';
 import { TwitchPage } from './pages/streams/twitch.page';
 import { WeatherPage } from './pages/weather/weather.page';
+import { ClipboardPage } from './pages/clipboard/clipboard.page';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'weather',
     component: WeatherPage,
+  },
+  {
+    path: 'clipboard',
+    component: ClipboardPage,
   },
 ];
 

@@ -1,0 +1,11 @@
+
+<mat-form-field class="clipboard-field" appearance="fill">
+    <textarea class="clipboard-area" [(ngModel)]="input" (keyup.enter)="addLinks()" matInput placeholder="Copy Clipboard Here"></textarea>
+</mat-form-field>
+
+<mat-card>
+    <button mat-fab color="primary" (click)="addLinks()"><mat-icon>add_link</mat-icon></button>
+    <ul class="link-list">
+      <li *ngFor="let link of links"><a [href]="link">{{link}}</a></li>
+    </ul>
+</mat-card>
