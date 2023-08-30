@@ -7,6 +7,10 @@
   cursor: pointer;
 }
 
+.game-filter-list{
+  width: 100%;
+}
+
 .grid {
   margin-top: 10px;
   display: grid;
@@ -53,6 +57,10 @@
 
 .stream-properties li:last-child {
   padding-right: 0;
+}
+
+.filter-game-button {
+  cursor: pointer;
 }
 
 ::ng-deep .snack-style {

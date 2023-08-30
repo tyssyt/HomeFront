@@ -16,7 +16,10 @@ export class TwitchPage implements OnInit, OnDestroy {
   refresher: Subscription | undefined;
   userName: string | undefined;
   twitchStreams: TwitchStream[] = [];
+  filteredStreams: TwitchStream[] = [];
   twitchStreamsMap: Map<string, number> = new Map();
+
+  filteredGames: string[] = [];
 
   constructor(
     private piPlayer: PiPlayer,
@@ -67,6 +70,7 @@ export class TwitchPage implements OnInit, OnDestroy {
       for (let i=0; i<newStreams.length; i++)
         this.twitchStreamsMap.set(newStreams[i].id, i);
       this.twitchStreams = newStreams;
+      this.updateFilteredStreams();
       return;
     }
 
@@ -85,6 +89,7 @@ export class TwitchPage implements OnInit, OnDestroy {
         this.twitchStreams[i] = stream;
       }
     }
+    this.updateFilteredStreams();
   }
 
   getThumbUrl(stream: TwitchStream): string {
@@ -114,6 +119,26 @@ export class TwitchPage implements OnInit, OnDestroy {
 
   trackById(i: number, stream: TwitchStream): string {
     return stream.id;
+  }
+
+  addFilteredGame(game: string) {
+    if (this.filteredGames.indexOf(game) < 0) {
+      this.filteredGames.push(game);
+    }
+    this.updateFilteredStreams();
+  }
+
+  removeFilteredGame(game: string) {
+    const index = this.filteredGames.indexOf(game);
+
+    if (index >= 0) {
+      this.filteredGames.splice(index, 1);
+    }
+    this.updateFilteredStreams();
+  }
+
+  updateFilteredStreams() {
+    this.filteredStreams = this.twitchStreams.filter(s => this.filteredGames.indexOf(s.game_name) < 0);
   }
 
 }

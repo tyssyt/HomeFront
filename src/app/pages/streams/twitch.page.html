@@ -1,12 +1,23 @@
+<div>
 <mat-form-field class="twitchUserInput" appearance="standard">
   <input #box matInput placeholder="Twitch Username" value="{{ userName }}" (keyup.enter)="updateUsername(box.value)">
   <mat-icon matSuffix inline (click)="updateUsername(box.value)">search</mat-icon>
 </mat-form-field>
+<mat-form-field class="game-filter-list" appearance="fill" *ngIf="filteredGames.length > 0">
+  <mat-label>Filtered Games</mat-label>
+  <mat-chip-list [selectable]="false">
+    <mat-chip *ngFor="let game of filteredGames" (removed)="removeFilteredGame(game)">
+      {{game}}
+      <button matChipRemove><mat-icon>cancel</mat-icon></button>
+    </mat-chip>
+  </mat-chip-list>
+</mat-form-field>
+</div>
 
 <mat-spinner *ngIf="twitchStreams.length == 0 && refresher != undefined" style="margin: auto;"></mat-spinner>
 
 <div class="grid">
-  <mat-card *ngFor="let stream of twitchStreams; trackBy: trackById">
+  <mat-card *ngFor="let stream of filteredStreams; trackBy: trackById">
     <img mat-card-image [src]="getThumbUrl(stream)" alt="Stream Preview" style="background-color:grey;">
     <mat-card-header>
       <img mat-card-avatar [src]="stream.profile_image_url">
@@ -16,7 +27,7 @@
     <div class="spacer"></div>
     <mat-card-subtitle>
       <ul class="stream-properties">
-        <li><mat-icon inline>sports_esports</mat-icon>&nbsp;{{ stream.game_name }}</li>
+        <li><mat-icon inline>sports_esports</mat-icon>&nbsp;{{ stream.game_name }}<mat-icon inline class="filter-game-button" (click)="addFilteredGame(stream.game_name)">filter_alt</mat-icon></li>
         <li><mat-icon inline>visibility</mat-icon>&nbsp;{{ stream.viewer_count}}</li>
         <li><mat-icon inline>schedule</mat-icon>&nbsp;{{ getUptime(stream) }}</li>
       </ul>
