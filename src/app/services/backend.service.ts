@@ -5,6 +5,7 @@ import { TwitchStream } from 'src/app/model/twitchStream';
 import { Download, Downloads } from '../model/download';
 import { ChannelPreview } from '../model/channelPreview';
 import { Video } from '../model/video';
+import { TwitchLogin } from '../model/twitchLogin';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,8 +19,16 @@ export class BackendService {
     private client:HttpClient
   ) { }
 
-  getTwitchStreams(channel: string): Observable<TwitchStream[]> {
-    return this.client.get('http://back.home/twitch/live/' + channel.toLowerCase()) as Observable<TwitchStream[]>;
+  createTwitchLogin(): Observable<TwitchLogin> {
+    return this.client.put('http://back.home/twitch/login', "", httpOptions) as Observable<TwitchLogin>;
+  }
+
+  getTwitchLogin(id: string): Observable<TwitchLogin> {
+    return this.client.get('http://back.home/twitch/login/' + id) as Observable<TwitchLogin>;
+  }
+
+  getTwitchStreams(id: string): Observable<TwitchStream[]> {
+    return this.client.get('http://back.home/twitch/live/' + id) as Observable<TwitchStream[]>;
   }
 
   getVideo(): Observable<Video> {

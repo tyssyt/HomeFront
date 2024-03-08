@@ -5,6 +5,7 @@ import { TwitchStream } from 'src/app/model/twitchStream';
 import { BackendService } from 'src/app/services/backend.service';
 import { PiPlayer } from 'src/app/services/piPlayer';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TwitchLogin } from 'src/app/model/twitchLogin';
 
 @Component({
   selector: 'page-twitch',
@@ -13,8 +14,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class TwitchPage implements OnInit, OnDestroy {
 
+  login: TwitchLogin | undefined;
+  loginRetrier: Subscription  | undefined;
+
   refresher: Subscription | undefined;
-  userName: string | undefined;
   twitchStreams: TwitchStream[] = [];
   filteredStreams: TwitchStream[] = [];
   twitchStreamsMap: Map<string, number> = new Map();
@@ -29,9 +32,13 @@ export class TwitchPage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    let newName = this.cookies.get("twitchUserName");
-    if (newName != undefined)
-      this.updateUsername(newName);
+    let loginId = this.cookies.get("twitchLogin");
+    if (loginId != undefined) {
+      this.updateLogin(loginId);
+      this.loginRetrier = interval(1000).subscribe(() => this.updateLogin(loginId));
+    } else {
+      this.startNewLogin();
+    }
   }
 
   ngOnDestroy(): void {
@@ -39,28 +46,52 @@ export class TwitchPage implements OnInit, OnDestroy {
       this.refresher.unsubscribe();
       this.refresher = undefined;
     }
+    if (this.loginRetrier != undefined) {
+      this.loginRetrier.unsubscribe();
+      this.loginRetrier = undefined;
+    }
     this.twitchStreams = [];
     this.twitchStreamsMap.clear();
+    this.filteredStreams = [];
+    this.filteredGames = [];
   }
 
-  updateUsername(newName: string) {
-    if (this.userName != undefined && newName.toLowerCase() == this.userName.toLowerCase())
-      return;
+  startNewLogin() {
+    this.ngOnDestroy();
 
+    this.backend.createTwitchLogin().subscribe(login => {
+      this.cookies.put("twitchLogin", login.id);
+      this.login = login;
+      this.loginRetrier = interval(1000).subscribe(() => this.updateLogin(login.id));
+    });
+  }
+
+  updateLogin(id: string) {
+    this.backend.getTwitchLogin(id).subscribe(login => {
+      this.login = login;
+      if (login.logged_in) {
+        this.loginRetrier?.unsubscribe();
+        console.log("Log In Successful: " + id);
+        this.onLoginSuccess();
+      }
+    }, error => {
+      this.startNewLogin();
+    })
+  }
+
+
+  onLoginSuccess() {
     if (this.refresher != undefined)
       this.refresher.unsubscribe();
-      this.twitchStreams = [];
-      this.twitchStreamsMap.clear();
-
-    this.userName = newName;
-    this.cookies.put("twitchUserName", newName);
+    this.twitchStreams = [];
+    this.twitchStreamsMap.clear();
 
     this.loadTwitchStreams();
     this.refresher = interval(20000).subscribe(() => this.loadTwitchStreams());
   }
 
   private loadTwitchStreams() {
-    this.backend.getTwitchStreams(this.userName!).subscribe(s => this.updateTwitchStreams(s));
+    this.backend.getTwitchStreams(this.login!.id).subscribe(s => this.updateTwitchStreams(s));
   }
 
   private updateTwitchStreams(newStreams: TwitchStream[]) {

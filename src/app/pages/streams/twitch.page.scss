@@ -1,14 +1,28 @@
-.twitchUserInput {
-  margin-left: 10px;
-  margin-right: 10px;
-  display: inline-block;
+.login-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
-.twitchUserInput .mat-icon {
-  cursor: pointer;
+
+.logout-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .game-filter-list{
   width: 100%;
+}
+
+.mat-spinner {
+  margin: auto;
+  margin-top: 50px;
 }
 
 .grid {

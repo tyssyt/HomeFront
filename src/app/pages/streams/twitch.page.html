@@ -1,8 +1,12 @@
-<div>
-<mat-form-field class="twitchUserInput" appearance="standard">
-  <input #box matInput placeholder="Twitch Username" value="{{ userName }}" (keyup.enter)="updateUsername(box.value)">
-  <mat-icon matSuffix inline (click)="updateUsername(box.value)">search</mat-icon>
-</mat-form-field>
+<div class="login-button-container" *ngIf="login != undefined && !login.logged_in">
+  <a mat-fab color="primary" [href]="login.verification_uri" target="_blank"><mat-icon>login</mat-icon></a>
+</div>
+<div class="logout-button-container" *ngIf="login != undefined && login.logged_in">
+  <button mat-fab color="primary" (click)="startNewLogin()"><mat-icon>logout</mat-icon></button>
+</div>
+
+<mat-spinner *ngIf="login == undefined || (login.logged_in && twitchStreams.length == 0)"></mat-spinner>
+
 <mat-form-field class="game-filter-list" appearance="fill" *ngIf="filteredGames.length > 0">
   <mat-label>Filtered Games</mat-label>
   <mat-chip-list [selectable]="false">
@@ -12,9 +16,6 @@
     </mat-chip>
   </mat-chip-list>
 </mat-form-field>
-</div>
-
-<mat-spinner *ngIf="twitchStreams.length == 0 && refresher != undefined" style="margin: auto;"></mat-spinner>
 
 <div class="grid">
   <mat-card *ngFor="let stream of filteredStreams; trackBy: trackById">
