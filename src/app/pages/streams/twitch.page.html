@@ -28,7 +28,7 @@
     <div class="spacer"></div>
     <mat-card-subtitle>
       <ul class="stream-properties">
-        <li><mat-icon inline>sports_esports</mat-icon>&nbsp;{{ stream.game_name }}<mat-icon inline class="filter-game-button" (click)="addFilteredGame(stream.game_name)">filter_alt</mat-icon></li>
+        <li><a class="hide-link" [href]="getCategoryUrl(stream)" target="_blank"><mat-icon inline>sports_esports</mat-icon>&nbsp;{{ stream.game_name }}</a><mat-icon inline class="filter-game-button" (click)="addFilteredGame(stream.game_name)">filter_alt</mat-icon></li>
         <li><mat-icon inline>visibility</mat-icon>&nbsp;{{ stream.viewer_count}}</li>
         <li><mat-icon inline>schedule</mat-icon>&nbsp;{{ getUptime(stream) }}</li>
       </ul>

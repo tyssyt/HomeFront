@@ -130,6 +130,15 @@ export class TwitchPage implements OnInit, OnDestroy {
     return stream.thumbnail_url.replace("{width}", "480").replace("{height}", "270") + '?' + this.getUptimeMin(stream); //reload every minute
   }
 
+  getCategoryUrl(stream: TwitchStream): string {
+    return "https://www.twitch.tv/directory/category/" + stream.game_name
+      .toLowerCase()
+      .normalize("NFKD")
+      .replace(/[ /]/g, "-")
+      .replace(/[^a-z0-9-]/g, "")
+      .replace(/-+/g, "-")
+  }
+
   getUptime(stream: TwitchStream): string {
     let uptime_minutes = this.getUptimeMin(stream);
     let uptime_hours = Math.floor( uptime_minutes / 60 );
